@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSS Positioning</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ================================
+   POSITIONING DEMONSTRATION
+================================ */
+.positioning-section {
+  margin: 40px 0;
+}
+
+/* Static Position */
+.static-demo {
+  position: static;
+  background-color: #e8f4f8;
+  border: 2px solid #264de4;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+/* Relative Position */
+.relative-demo {
+  position: relative;
+  background-color: #d5f4e6;
+  border: 2px solid #27ae60;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.relative-demo.example {
+  top: 20px;
+  left: 30px;
+}
+
+.relative-demo::after {
+  content: "↖ เลื่อน ขึ้น 20px ไป 30px";
+  font-size: 0.8em;
+  color: #27ae60;
+}
+
+/* Absolute Position */
+.absolute-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-color: #ecf0f1;
+  border: 2px solid #95a5a6;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.absolute-child {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.absolute-child.top-left {
+  top: 10px;
+  left: 10px;
+}
+
+.absolute-child.top-right {
+  top: 10px;
+  right: 10px;
+}
+
+.absolute-child.bottom-left {
+  bottom: 10px;
+  left: 10px;
+}
+
+.absolute-child.bottom-right {
+  bottom: 10px;
+  right: 10px;
+}
+
+.absolute-child.centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f39c12;
+}
+
+/* Fixed Position */
+.fixed-demo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #264de4;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.fixed-demo:hover {
+  background-color: #1a3a8f;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Sticky Position */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #3498db;
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 4px 4px 0 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-content {
+  background-color: #d6eaf8;
+  padding: 20px;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 20px;
+}
+
+/* Stacking order (z-index) */
+.stacking-demo {
+  position: relative;
+  height: 200px;
+  margin: 20px 0;
+  background-color: #ecf0f1;
+  border: 2px solid #95a5a6;
+}
+
+.box-z1 {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  background-color: #e74c3c;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.box-z2 {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  background-color: #f39c12;
+  top: 40px;
+  left: 100px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.box-z3 {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  background-color: #27ae60;
+  top: 80px;
+  left: 180px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Badge with absolute position */
+.badge-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: #d6eaf8;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>CSS Positioning</h1>
+
+<!-- Static Position -->
+<section class="positioning-section">
+<h2>1. Static Position (ค่าเริ่มต้น)</h2>
+<p>Static คือค่าเริ่มต้น element อยู่ในตําแหน่งปกติใน document flow</p>
+<div class="static-demo">
+<p>
+This is static positioned element<br />
+→ อยู่ในลําดับปกติของ HTML
+</p>
+</div>
+</section>
+
+<!-- Relative Position -->
+<section class="positioning-section">
+<h2>2. Relative Position (สัมพัธ์กับตําแหน่งเดิม)</h2>
+<p>Relative ย้ายตําแหน่งเทียบกับตําแหน่งเดิม แต่ยังคงใช้พื้นที่เดิม</p>
+<div class="relative-demo">
+<p>ไม่มีการเลื่อน</p>
+</div>
+<div class="relative-demo example">
+<p>เลื่อนด้วย relative positioning</p>
+</div>
+</section>
+
+<!-- Absolute Position -->
+<section class="positioning-section">
+<h2>3. Absolute Position (สัมพัธ์กับ parent)</h2>
+<p>
+Absolute นํา element ออกจาก flow และวางตําแหน่งเทียบกับ parent ที่มี position
+</p>
+
+<h3>ตําแหน่งต่างๆ ใน Container:</h3>
+<div class="absolute-container">
+<div class="absolute-child top-left">Top Left</div>
+<div class="absolute-child top-right">Top Right</div>
+<div class="absolute-child bottom-left">Bottom Left</div>
+<div class="absolute-child bottom-right">Bottom Right</div>
+<div class="absolute-child centered">Center</div>
+</div>
+
+<h3>ตัวอย่าง: Badge on Card</h3>
+<div class="badge-container">
+<p>Product Card</p>
+<div class="badge">🔥</div>
+</div>
+</section>
+
+<!-- Fixed Position -->
+<section class="positioning-section">
+<h2>4. Fixed Position (สัมพัธ์กับ viewport)</h2>
+<p>
+Fixed ติดกับหน้าจอ ไม่เลื่อนไปกับ scroll content (ดูปุ่มด้านล่างขวา)
+</p>
+<p>ปุ่ม ➕ ด้านล่างขวาของหน้าจอคือ fixed element</p>
+</section>
+
+<!-- Sticky Position -->
+<section class="positioning-section">
+<h2>5. Sticky Position (Hybrid)</h2>
+<p>
+Sticky รวม relative และ fixed - ปกติ relative แต่ sticky เมื่อ scroll
+</p>
+<div class="sticky-header">Sticky Header - Scroll ลงมาดู!</div>
+<div class="sticky-content">
+<p>Sticky position ทําให้ header ติดด้านบนเมื่อ scroll</p>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+<p>
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+nisi ut aliquip ex ea commodo consequat.
+</p>
+<p>
+Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur.
+</p>
+<p>
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+officia deserunt mollit anim id est laborum.
+</p>
+</div>
+</section>
+
+<!-- Stacking Order -->
+<section class="positioning-section">
+<h2>6. Stacking Order (z-index)</h2>
+<p>z-index ควบคุมลําดับการ stack ยิ่งสูง ยิ่งอยู่บนสุด</p>
+<div class="stacking-demo">
+<div class="box-z1">z-index: 1</div>
+<div class="box-z2">z-index: 2</div>
+<div class="box-z3">z-index: 3</div>
+</div>
+</section>
+
+<!-- Position Comparison Table -->
+<section class="positioning-section">
+<h2>Position Values Comparison</h2>
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+<thead>
+<tr style="background-color: #264de4; color: white; text-align: left">
+<th style="padding: 10px; border: 1px solid #ddd">Position</th>
+<th style="padding: 10px; border: 1px solid #ddd">อ้างอิงกับ</th>
+<th style="padding: 10px; border: 1px solid #ddd">ใช้เมื่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd"><strong>static</strong></td>
+<td style="padding: 10px; border: 1px solid #ddd">Document flow</td>
+<td style="padding: 10px; border: 1px solid #ddd">ไม่ต้องย้ายตําแหน่ง</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd"><strong>relative</strong></td>
+<td style="padding: 10px; border: 1px solid #ddd">ตําแหน่งเดิม</td>
+<td style="padding: 10px; border: 1px solid #ddd">ปรับแต่งเล็กน้อย</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd"><strong>absolute</strong></td>
+<td style="padding: 10px; border: 1px solid #ddd">Parent ที่มี position</td>
+<td style="padding: 10px; border: 1px solid #ddd">วาง badge, tooltip</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd"><strong>fixed</strong></td>
+<td style="padding: 10px; border: 1px solid #ddd">Viewport</td>
+<td style="padding: 10px; border: 1px solid #ddd">Navbar, floating button</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd"><strong>sticky</strong></td>
+<td style="padding: 10px; border: 1px solid #ddd">Parent + Viewport</td>
+<td style="padding: 10px; border: 1px solid #ddd">Table header, sticky nav</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+
+<!-- Fixed Button -->
+<div class="fixed-demo">+</div>
+</body>
+</html>
